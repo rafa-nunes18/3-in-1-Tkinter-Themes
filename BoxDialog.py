@@ -1,3 +1,6 @@
+
+
+# Importações
 import sys  
 import tkinter as tk  
 from tkinter import ttk 
@@ -86,7 +89,6 @@ class MyDialog(tk.Toplevel):
         da janela de mensagem, escolha o tamanho e teste antes de usar.    
         """            
         if self.fonte != None: 
-            # Verifica se a fonte é uma tupla e ajusta conforme necessário  
             if isinstance(self.fonte, tuple):  
                 if len(self.fonte) == 3:  
                     self.font_name, self.font_size_title, self.font_size_details = self.fonte
