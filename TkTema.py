@@ -61,6 +61,7 @@ class MyTema(tk.Tk):
             self.set_icon_mac()
             AppKit.NSApplication.sharedApplication()                                              
         elif sys.platform.startswith("linux"):
+            self.menus_button= []
             self.screenshot_path = "tema_screenshot.png"
             self.criar_atalho_linux()           
             self.master_linux = True
@@ -143,7 +144,7 @@ class MyTema(tk.Tk):
                 cursor_linux = tx.x_load_cursor(child, cursor)  
                 tx.x_set_cursor(child, cursor_linux)  
             except Exception as e:  
-                print(f"Erro ao colocar o cursor no child {child} (ID: {id}), erro: {e}")            
+                print(f"Erro ao colocar o cursor no child {child} (ID: {id}), erro: {e}")                   
 
     def mudar_icone_barra(self,imagem):       
             self.mybar1.mudar_icone(imagem)            
@@ -180,21 +181,38 @@ class MyTema(tk.Tk):
         tema = ttk.Style().theme_use()
         if tema in dicio.cursores_mac:
             self.cursor_mac_os = dicio.cursores_mac[tema].replace("@","")                 
-            self.after(50, MacAPIManager.set_custom_cursor,self.cursor_mac_os)           
-        
-    def set_all_buttons_menu_mac(self):
+            self.after(50, MacAPIManager.set_custom_cursor,self.cursor_mac_os) 
+
+    def enter_button_menu_linux(self,event):
+        self.after(50, self.set_all_menu_cursor_linux)
+            
+
+    def set_all_buttons_menu(self):
         for button in self.menus_button:
-            button.bind("<Button-1>",self.enter_button_menu_mac)
-            button.bind("<ButtonRelease-1>",self.enter_button_menu_mac)            
-        
+            if sys.platform == "darwin":                
+                button.bind("<Button-1>",self.enter_button_menu_mac)
+                button.bind("<ButtonRelease-1>",self.enter_button_menu_mac)
+            elif sys.platform.startswith("linux"):
+                button.bind("<Button-1>",self.enter_button_menu_linux)
+
+    def set_all_menu_cursor_linux(self):        
+        for menu in self.menus:
+            tema = ttk.Style().theme_use()
+            if tema in dicio.cursores_mac:          
+                MyTema.mudar_cursor_linux(menu,self.cursor_padrao)
+            else:
+                MyTema.mudar_cursor(menu,self.cursor_padrao)         
+
     def mainloop(self, *args, **kwargs):
         if sys.platform == "win32" :            
             self.buscar_menus()
         elif sys.platform == "darwin": 
             self.buscar_botoes_menu()
-            self.set_all_buttons_menu_mac()                          
+            self.set_all_buttons_menu()                          
         elif sys.platform.startswith("linux"):
-            self.buscar_menus_linux()        
+            self.buscar_botoes_menu()
+            self.buscar_menus_linux()
+            self.set_all_buttons_menu()         
         self.ativar_tema() 
         super().mainloop(*args, **kwargs)             
    
@@ -276,7 +294,7 @@ class MyTema(tk.Tk):
             elif isinstance(child, tk.Menu):
                 menu = child
                 self.menus.append(menu)
-            self.buscar_menus(child)            
+            self.buscar_menus_linux(child)            
     
     def update_menubutton_styles(self, **kwargs):        
         for menu in self.menus:         
@@ -326,7 +344,7 @@ class MyTema(tk.Tk):
         self.atualizar_widgets(tema)
         self.mudar_cursores(tema)
         if sys.platform == "darwin":
-            self.ativar_modo_dark_mac(tema)                          
+            self.ativar_modo_dark_mac(tema)                             
 
     def centralizar_janela(self):
         self.minsize(self.winfo_width(), self.winfo_height())
