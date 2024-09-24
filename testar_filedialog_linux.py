@@ -11,7 +11,7 @@ def abrir_caixa_dialogo():
 
 # Inicializa a aplicação tkinter  
 root = MyTema("Meu App")
-root.set_tema("forest-dark")
+root.set_tema("sun-valley-dark")
 # Cria um botão para abrir a caixa de diálogo  
 botao_abre_dialogo = ttk.Button(root, text="Abrir Caixa de Diálogo", command=abrir_caixa_dialogo)  
 botao_abre_dialogo.grid(row=1, column=0, padx=5, pady=10, sticky="nsew")
