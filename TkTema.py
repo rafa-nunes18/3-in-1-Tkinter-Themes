@@ -846,6 +846,7 @@ class MyTopManager:
             "type": tipo_posicao,
             "kwargs": kwargs 
         }
+
     def set_toplevel_config(self, nome_toplevel, peso_colunas=1, peso_linhas=1):  
         """Coleta as informações do usuário e armazena no dicionário de configurações."""  
         if nome_toplevel not in self.toplevel_configs:  
