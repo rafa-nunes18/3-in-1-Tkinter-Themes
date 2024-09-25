@@ -1,3 +1,14 @@
+# Autor:
+
+# Rafael A. Nunes (rafa.nunes2018@hotmail.com) 2024
+
+# Inspiração:
+# Repositório no GitHub de rdbende chamado, Tema Azure-ttk. 
+# https://github.com/rdbende/Azure-ttk-theme
+# License: MIT license
+# Source: https://github.com/rdbend
+
+
 from TkTema import *
 from exemplo_mypopup import chamar_popups
 from exemplo_comando_mytoplevel import exemplo_comando

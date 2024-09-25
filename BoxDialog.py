@@ -1,4 +1,41 @@
+# Autor:
 
+# Rafael A. Nunes (rafa.nunes2018@hotmail.com) 2024 
+
+# Inspiração:
+
+# Repositório no GitHub de rdbende chamado Sun Valley messageboxes
+# https://github.com/rdbende/Sun-Valley-messageboxes
+# rdbende (rdbende@proton.me)
+# https://matrix.to/#/@rdbende:matrix.org
+# @rdbende@mastodon.social
+
+# MIT License
+
+# Copyright (c) 2021 rdbende
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# Introdução:
+ 
+# A classe "MyPopup" é uma ferramenta que utiliza "MyDialog" para exibir diálogos interativos no aplicativo.
+# Ela permite a exibição de ícone, título e mensagem, bem como a solicitação de resposta do usuário, como confirmações e cancelamentos.  
 
 # Importações
 import sys  
@@ -11,9 +48,22 @@ if sys.platform.startswith("linux"):
 
     
 class MyDialog(tk.Toplevel):
-    
+    """
+    Classe que representa um diálogo personalizado utilizando a biblioteca Tkinter.  
 
+    Este diálogo é uma subclasse de Toplevel que oferece uma interface para exibir informações e botões.    
+    """
     def __init__(self, master, title, details, icon, *,buttons, font):
+        """
+        Inicializa o diálogo com as configurações fornecidas e define o tema e estilo.  
+        
+        :param master: A janela pai (ou mestre) na qual o diálogo será exibido.  
+        :param title: O título do diálogo.  
+        :param details: Detalhes ou informações a serem exibidos no diálogo.  
+        :param icon: O ícone a ser exibido na janela do diálogo.  
+        :param buttons: Uma lista de botões a serem incluídos no diálogo.  
+        :param font: Fonte a ser utilizada para o texto no diálogo.  
+        """  
         super().__init__(master)           
         self.master = master  
         self.title = title  
@@ -30,6 +80,11 @@ class MyDialog(tk.Toplevel):
         self.default_tema_config()
       
     def default_tema_config(self):
+        """  
+        Configura os elementos padrões do tema e do layout do diálogo.  
+
+        Este método cria a estrutura do diálogo, incluindo frames, canvas e botões.
+        """
         self.master.minimized = True
           
         self.big_frame = tk.Frame(self)  
@@ -108,6 +163,11 @@ class MyDialog(tk.Toplevel):
             self.set_font()
 
     def set_font(self):
+        """  
+        Define a fonte a ser utilizada na interface do diálogo com base no sistema operacional em uso.   
+        A fonte é escolhida de acordo com a plataforma (Windows, macOS ou Linux) e aplicada a diferentes tamanhos   
+        para título e detalhes.  
+        """  
         if sys.platform == "win32":   
             self.font_name = r"C:\\Windows\\Fonts\\Arial.ttf"
         elif sys.platform == "darwin":
@@ -117,12 +177,22 @@ class MyDialog(tk.Toplevel):
         self.font = ImageFont.truetype(self.font_name, self.font_size_title)  
         self.font2 = ImageFont.truetype(self.font_name, self.font_size_details)                   
         
-    def mudar_cursores(self,cursor):        
+    def mudar_cursores(self,cursor):
+        """  
+        Altera o cursor do ponteiro para um especificado no diálogo e em todos os seus filhos.   
+        Isso aplica um cursor consistente em toda a interface.  
+
+        :param cursor: O nome do cursor a ser aplicado.  
+        """         
         self.config(cursor=cursor)
         for child in self.winfo_children():  
                 child.config(cursor=cursor)
 
     def mudar_cursor(self):
+        """  
+        Atualiza o cursor do diálogo de acordo com o tema atual, utilizando um dicionário pré-definido   
+        de cursores para Windows. Se o tema não estiver no dicionário, o cursor padrão é utilizado.  
+        """ 
         if self.tema in dicio.cursores_windows:
             cursor = dicio.cursores_windows[self.tema]
             self.mudar_cursores(cursor)
@@ -130,6 +200,11 @@ class MyDialog(tk.Toplevel):
             self.mudar_cursores("arrow") 
 
     def mudar_cursor_linux(self):
+        """  
+        Altera o cursor em sistemas Linux utilizando um dicionário de cursores.   
+        Se o tema especificado não estiver disponível, o cursor padrão é utilizado.  
+        Se houver falha ao carregar um cursor para um filho, uma mensagem de erro é exibida.  
+        """ 
         if self.tema in dicio.cursores_linux:
             cursor = dicio.cursores_linux[self.tema]                    
             cursor_linux = tx.x_load_cursor(self, cursor)  
@@ -144,7 +219,12 @@ class MyDialog(tk.Toplevel):
         else:
             self.mudar_cursores("arrow")
 
-    def ativar_transparencia(self):          
+    def ativar_transparencia(self):
+        """  
+        Ativa a transparência na janela do diálogo, definindo uma cor específica   
+        (neste caso, verde claro) como a cor de fundo transparente.   
+        Isso melhora a estética do diálogo removendo o fundo.  
+        """           
         cor_transparente = "#3af30c"                                   
         self.master.attributes('-alpha', 0)            
         self.wm_attributes("-transparentcolor", cor_transparente)  
@@ -153,7 +233,16 @@ class MyDialog(tk.Toplevel):
                     highlightcolor=cor_transparente)  
         self.button_frame.config(style="Dialog_buttons.TFrame")        
           
-    def criar_botoes(self,button_frame, buttons):  
+    def criar_botoes(self,button_frame, buttons):
+        """  
+        Cria botões no frame especificado com base em uma lista de valores.   
+        Cada botão pode ter um estado e estilo específicos, permitindo criar   
+        botões com ações definidas pelos usuários.  
+
+        :param button_frame: O frame onde os botões serão colocados.  
+        :param buttons: Uma lista de tuplas, onde cada tupla contém   
+                        (texto_do_botão, comando_associado, estado_opcional).  
+        """   
         for index, button_value in enumerate(buttons):  
             style = None  
             state = None  
@@ -183,6 +272,13 @@ class MyDialog(tk.Toplevel):
             button_frame.columnconfigure(index, weight=1)      
 
     def on_button(self,value):
+        """  
+        Trata a ação de um botão quando clicado. Define o resultado da ação e   
+        destrói a janela do diálogo. Isso também permite restaurar a visibilidade do   
+        elemento pai do diálogo.  
+
+        :param value: O valor associado ao botão, que será retornado quando o diálogo for fechado.  
+        """ 
         try:
             self.master.attributes('-alpha', 1) 
         except Exception as e:   
@@ -191,14 +287,30 @@ class MyDialog(tk.Toplevel):
         self.result[0] = value  
         self.destroy()
 
-    def show(self):         
+    def show(self):
+        """  
+        Exibe o diálogo como uma janela modal, permitindo que o usuário interaja   
+        até que a janela seja fechada. Retorna o resultado da interação ao   
+        usuário quando o diálogo é fechado.  
+
+        :return: O valor resultante da interação do usuário com o diálogo.  
+        """          
         self.transient(self.master)  
         self.grab_set() 
         self.wait_window(self)         
         return self.result[0]     
 
     def create_rounded_image(self,image, radius):  
-        # Cria uma nova imagem com as dimensões da imagem original  
+        """  
+        Cria uma nova imagem com bordas arredondadas com base em uma imagem original,   
+        utilizando um raio de arredondamento especificado. Isso é utilizado para   
+        dar um estilo visual mais suave e moderno ao diálogo.  
+
+        :param image: A imagem original que será arredondada.  
+        :param radius: O raio para as bordas arredondadas.  
+
+        :return: A imagem original com bordas arredondadas.  
+        """ 
         rounded_mask = Image.new('L', image.size, 0)  
         draw = ImageDraw.Draw(rounded_mask)  
         draw.rounded_rectangle((0, 0, image.size[0], image.size[1]), radius, fill=255)   
@@ -206,29 +318,43 @@ class MyDialog(tk.Toplevel):
         rounded_image.paste(image, (0, 0), rounded_mask)        
         return rounded_image
 
-    def atualizar_imagem(self):        
-            if self.tema in dicio.fundos_tema:
-                if sys.platform == "win32": 
-                    imagem = Image.open(dicio.fundos_tema[self.tema]["imagem-fundo"])
-                else:
-                    imagem = Image.open(dicio.fundos_tema[self.tema]["imagem-fundo"].replace('\\','/')) 
+    def atualizar_imagem(self):
+        """  
+        Atualiza a imagem de fundo e o ícone do diálogo de acordo com o tema atual.   
+        A imagem é carregada de acordo com o sistema operacional em uso e a configuração do tema.  
+        Se um ícone for especificado, também é carregada uma imagem de ícone correspondente.  
+        Caso contrário, uma mensagem de aviso é exibida.  
+        """         
+        if self.tema in dicio.fundos_tema:
+            if sys.platform == "win32": 
+                imagem = Image.open(dicio.fundos_tema[self.tema]["imagem-fundo"])
             else:
-                if sys.platform == "win32":
-                    imagem = Image.open(r"imagens\fundos\tema-light.png")
-                else:
-                    imagem = Image.open(r"imagens\fundos\tema-light.png".replace('\\','/'))    
-            if self.icon != None:                
-                icone = "imagem-" + str(self.icon) + "-icon"
-                tema_icon = str(self.tema).replace("-light","").replace("-dark","")
-                if sys.platform == "win32":
-                    imagem_icon = Image.open(dicio.icons_box[tema_icon][icone])
-                else:   
-                    imagem_icon = Image.open(dicio.icons_box[tema_icon][icone].replace('\\','/'))              
-                return  imagem ,imagem_icon
+                imagem = Image.open(dicio.fundos_tema[self.tema]["imagem-fundo"].replace('\\','/')) 
+        else:
+            if sys.platform == "win32":
+                imagem = Image.open(r"imagens\fundos\tema-light.png")
             else:
-                print("escolha um ícone")
+                imagem = Image.open(r"imagens\fundos\tema-light.png".replace('\\','/'))    
+        if self.icon != None:                
+            icone = "imagem-" + str(self.icon) + "-icon"
+            tema_icon = str(self.tema).replace("-light","").replace("-dark","")
+            if sys.platform == "win32":
+                imagem_icon = Image.open(dicio.icons_box[tema_icon][icone])
+            else:   
+                imagem_icon = Image.open(dicio.icons_box[tema_icon][icone].replace('\\','/'))              
+            return  imagem ,imagem_icon
+        else:
+            print("escolha um ícone")
     
-    def rolagem_texto(self, text, max_width):  
+    def rolagem_texto(self, text, max_width):
+        """  
+        Divide o texto em várias linhas, garantindo que cada linha não exceda a largura máxima especificada.  
+            
+        :param text: O texto a ser dividido em linhas.  
+        :param max_width: A largura máxima que cada linha pode ocupar.  
+            
+        :return: Uma lista de linhas resultantes.  
+        """   
         linhas = []  
         palavras = text.split()  
         linha_atual = ""
@@ -252,7 +378,16 @@ class MyDialog(tk.Toplevel):
         return linhas 
 
     def desenhar_contorno_texto(self,draw, text, position, font, cor_texto, cor_contorno):  
-        # Deslocamentos para desenhar o contorno em torno do texto  
+        """  
+        Desenha o texto com um contorno ao redor, aumentando a legibilidade.  
+
+        :param draw: O objeto de desenho onde o texto será desenhado.  
+        :param text: O texto que será desenhado.  
+        :param position: A posição (x, y) onde o texto será desenhado.  
+        :param font: A fonte a ser utilizada para desenhar o texto.  
+        :param cor_texto: A cor do texto.  
+        :param cor_contorno: A cor do contorno do texto.  
+        """  
         offset_positions = [(-1, -1),  # Cima à esquerda  
                             (1, -1),   # Cima à direita  
                             (-1, 1),   # Baixo à esquerda  
@@ -266,14 +401,26 @@ class MyDialog(tk.Toplevel):
             draw.text((position[0] + offset_x, position[1] + offset_y), text, fill=cor_contorno, font=font)
         draw.text(position, text, fill=cor_texto, font=font)  
 
-    def criar_titulo_imagem(self, title, image):        
+    def criar_titulo_imagem(self, title, image):
+        """  
+        Cria um título na imagem fornecida.  
+
+        :param title: O texto do título a ser desenhado.  
+        :param image: A imagem onde o título será desenhado.  
+        """         
         draw = ImageDraw.Draw(image)  
         x = 40  
         y = 15  
         cor_texto ,cor_contorno = self.set_color_font()      
         self.desenhar_contorno_texto(draw, title, (x, y), self.font, cor_texto, cor_contorno)  
 
-    def criar_detalhes_imagem(self, detalhes, image):        
+    def criar_detalhes_imagem(self, detalhes, image):
+        """  
+        Adiciona detalhes a uma imagem, dividindo o texto conforme necessário para caber na largura especificada.  
+
+        :param detalhes: O texto de detalhes a ser adicionado à imagem.  
+        :param image: A imagem na qual os detalhes serão desenhados.  
+        """          
         draw = ImageDraw.Draw(image)  
         margem_esquerda = 160  
         max_largura_detalhes = image.size[0] - 60 
@@ -286,6 +433,11 @@ class MyDialog(tk.Toplevel):
             self.desenhar_contorno_texto(draw, line, position, self.font2, cor_texto, cor_contorno)
     
     def set_color_font(self):
+        """  
+        Define as cores do texto e do contorno com base no tema atual.  
+
+        :return: As cores do texto e do contorno.  
+        """ 
         if self.tema in dicio.fundos_tema:  
             cor_texto = (255, 255, 255, 255)  
             cor_contorno = (0, 0, 0)    
@@ -295,19 +447,34 @@ class MyDialog(tk.Toplevel):
         return  cor_texto ,cor_contorno         
 
     def criar_imagem_canvas(self,imagem,canvas):
-        #Converter a imagem com texto para PhotoImage  
+        """  
+        Converte uma imagem em um formato que pode ser exibido em um canvas do Tkinter.  
+
+        :param imagem: A imagem a ser convertida.  
+        :param canvas: O canvas onde a imagem será exibida.  
+        """ 
         fundo_imagem = ImageTk.PhotoImage(imagem)  
         canvas.create_image(0, 0, anchor=tk.NW, image=fundo_imagem)  
         canvas.image1 = fundo_imagem
 
     def criar_icone(self,imagem,canvas):
-        #Adicionar o ícone sobre a imagem de fundo     
+        """  
+        Adiciona um ícone a um canvas sobre uma imagem de fundo.  
+
+        :param imagem: A imagem do ícone a ser adicionada.  
+        :param canvas: O canvas onde o ícone será desenhado.  
+        """      
         icon_image = imagem.resize((100, 100), Image.LANCZOS)  
         icon_tk = ImageTk.PhotoImage(icon_image)      
         canvas.create_image(30, 60, anchor=tk.NW, image=icon_tk)   
         canvas.image2 = icon_tk                                      
 
-    def center_dialog(self,master):  
+    def center_dialog(self,master):
+        """  
+        Centraliza o diálogo na tela ou em relação à janela pai fornecida.  
+
+        :param master: A janela pai em relação à qual o diálogo será centralizado.  
+        """    
         self.update_idletasks()
         dialog_width = self.winfo_width()  
         dialog_height = self.winfo_height()
@@ -327,10 +494,32 @@ class MyDialog(tk.Toplevel):
         self.minsize(320, dialog_height)    
 
 class MyPopup():
+    """  
+    Classe responsável por exibir MyDialog em diferentes tipos de popups para interagir com o usuário, com configurações personalizáveis.    
+    """  
+
     def __init__(self, master):
+        """  
+        Inicializa a classe MyPopup com uma referência à janela principal.    
+
+        :param master: A janela principal onde o popup será exibido.  
+        """  
         self.master = master
 
-    def show_mensagem(self, title="Title", details="Description", *, icon="info", font=None):  
+    def show_mensagem(self, title="Title", details="Description", *, icon="info", font=None): 
+        """  
+        Mostra uma mensagem de informação com um botão "Ok".  
+        
+        Este método exibe uma caixa de diálogo com um título e uma descrição fornecidos, permitindo ao usuário   
+        reconhecer a informação apresentada.  
+
+        :param title: O título da mensagem.  
+        :param details: A descrição da mensagem.  
+        :param icon: O ícone a ser exibido (padrão é "info").  
+        :param font: A fonte a ser utilizada no texto.  
+        
+        :return: O resultado da interação com o diálogo.  
+        """   
         dialog = MyDialog(  
             self.master,  
             title,  
@@ -342,7 +531,20 @@ class MyPopup():
         dialog.show()   
         return dialog.result[0] 
 
-    def ask_sim_cancelar(self, title="Title", details="Description", *, icon="pergunta", font=None):  
+    def ask_sim_cancelar(self, title="Title", details="Description", *, icon="pergunta", font=None):
+        """  
+        Solicita ao usuário uma confirmação com opções "Sim" e "Cancelar".  
+        
+        Este método é utilizado para perguntar ao usuário se ele deseja prosseguir ou não, oferecendo uma   
+        escolha clara entre duas opções.  
+
+        :param title: O título da pergunta.  
+        :param details: A descrição da pergunta.  
+        :param icon: O ícone a ser exibido (padrão é "pergunta").  
+        :param font: A fonte a ser utilizada no texto.  
+        
+        :return: True se o usuário escolher "Sim", caso contrário None.  
+        """   
         dialog = MyDialog(  
             self.master,  
             title,  
@@ -354,7 +556,19 @@ class MyPopup():
         dialog.show()  
         return dialog.result[0]  
 
-    def ask_sim_nao(self, title="Title", details="Description", *, icon="pergunta", font=None):  
+    def ask_sim_nao(self, title="Title", details="Description", *, icon="pergunta", font=None):
+        """  
+        Solicita ao usuário uma confirmação com opções "Sim" e "Não".  
+        
+        Este método é projetado para permitir que o usuário tome decisões claras através de respostas diretas.   
+
+        :param title: O título da pergunta.  
+        :param details: A descrição da pergunta.  
+        :param icon: O ícone a ser exibido (padrão é "pergunta").  
+        :param font: A fonte a ser utilizada no texto.  
+        
+        :return: True se o usuário escolher "Sim", False se escolher "Não".  
+        """   
         dialog = MyDialog(  
             self.master,  
             title,  
@@ -366,7 +580,19 @@ class MyPopup():
         dialog.show()  
         return dialog.result[0]  
 
-    def ask_sim_nao_cancelar(self, title="Title", details="Description", *, icon="pergunta", font=None):  
+    def ask_sim_nao_cancelar(self, title="Title", details="Description", *, icon="pergunta", font=None):
+        """  
+        Solicita ao usuário uma confirmação com opções "Sim", "Não" e "Cancelar".  
+
+        Este método oferece uma escolha mais completa ao usuário, permitindo que ele tente interromper uma ação proposta.  
+
+        :param title: O título da pergunta.  
+        :param details: A descrição da pergunta.  
+        :param icon: O ícone a ser exibido (padrão é "pergunta").  
+        :param font: A fonte a ser utilizada no texto.  
+        
+        :return: True se o usuário escolher "Sim", False se escolher "Não", caso contrário None.  
+        """   
         dialog = MyDialog(  
             self.master,  
             title,  
@@ -378,7 +604,19 @@ class MyPopup():
         dialog.show()  
         return dialog.result[0]  
 
-    def ask_repetir_cancelar(self, title="Title", details="Description", *, icon="pergunta", font=None):  
+    def ask_repetir_cancelar(self, title="Title", details="Description", *, icon="pergunta", font=None):
+        """  
+        Solicita ao usuário uma confirmação com opções "Repetir" e "Cancelar".  
+        
+        Este método é útil para situações onde o usuário pode optar por repetir uma ação anterior ou cancelá-la.  
+
+        :param title: O título da pergunta.  
+        :param details: A descrição da pergunta.  
+        :param icon: O ícone a ser exibido (padrão é "pergunta").  
+        :param font: A fonte a ser utilizada no texto.  
+        
+        :return: True se o usuário escolher "Repetir", caso contrário None.  
+        """   
         dialog = MyDialog(  
             self.master,  
             title,  
@@ -390,7 +628,20 @@ class MyPopup():
         dialog.show()  
         return dialog.result[0]  
 
-    def ask_aceitar_recusar(self, title="Title", details="Description", *, icon="pergunta", font=None):  
+    def ask_aceitar_recusar(self, title="Title", details="Description", *, icon="pergunta", font=None):
+        """  
+        Solicita ao usuário uma confirmação com opções "Aceitar" e "Recusar".  
+        
+        Este método permite que o usuário decida se aceita ou recusa uma ação proposta, com a possibilidade de   
+        feedback claro.  
+
+        :param title: O título da pergunta.  
+        :param details: A descrição da pergunta.  
+        :param icon: O ícone a ser exibido (padrão é "pergunta").  
+        :param font: A fonte a ser utilizada no texto.  
+        
+        :return: True se o usuário escolher "Aceitar", False se escolher "Recusar".  
+        """   
         dialog = MyDialog(  
             self.master,  
             title,  

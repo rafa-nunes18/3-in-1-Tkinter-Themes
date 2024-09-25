@@ -1,3 +1,13 @@
+# Autor:
+
+# Rafael A. Nunes (rafa.nunes2018@hotmail.com) 2024
+
+# Inspiração:
+# Repositório no GitHub de rdbende chamado, Tema Azure-ttk. 
+# https://github.com/rdbende/Azure-ttk-theme
+# License: MIT license
+# Source: https://github.com/rdbend
+
 # Importar bibliotecas
 from TkTema import *
 from exemplo_mypopup import chamar_popups
@@ -6,6 +16,9 @@ from exemplo_comando_mytoplevel import exemplo_comando
 # Iniciar instancias
 root = MyTema("*****  Meu projeto de Mudar o tema Tkinter  *****")
 top = MyTopManager()
+
+# # Modificar o icone de barra
+# root.mudar_icone_barra(r"imagens\icons\controle-de-jogo.ico")
 
 #Definir o layout de grade na janela
 # Configuração para 3 colunas

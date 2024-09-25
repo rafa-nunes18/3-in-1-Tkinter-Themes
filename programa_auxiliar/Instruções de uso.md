@@ -32,7 +32,7 @@ Vá para a aba "Compatibilidade". Marque a opção "Executar este programa como 
 Clique em "OK" para confirmar.
 
 ## OBS:
-Com essa configuração, toda vez que você iniciar o VSCode através desse atalho ou seu executável,
+Com essa configuração, toda vez que você iniciar o VSCode através desse atalho,
 ele será executado com privilégios de administrador.
 
 # Terceiro:

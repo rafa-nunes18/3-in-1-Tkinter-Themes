@@ -1,3 +1,32 @@
+# Autor:
+
+# Rafael A. Nunes (rafa.nunes2018@hotmail.com) 2024 
+
+# Inspiração:
+
+# Repositório no GitHub de Moisés-Palmer chamada pystray
+# https://github.com/moses-palmer/pystray 
+# Moisés-Palmer (https://github.com/moses-palmer)
+
+# Copyright (C) 2016-2017 Moses Palmér
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU Lesser General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option) any
+# later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+# Introdução:
+# A classe "MyIcon" é uma ferramenta para exibir um atalho da Janela do Tkinter na barra de tarefas do Linux.
+ 
+
 # Importar bibliotecas
 import contextlib
 import functools
@@ -37,14 +66,24 @@ def display_manager(display):
         raise XError(errors)
 
 class MyIcon(object):
+    """  
+    Classe responsável por gerenciar um ícone na barra de tarefas, permitindo a interação   
+    com a janela principal da aplicação.  
+
+    Esta classe cria um atalho da janela com ícone na barra de tarefas, gerencia eventos do   
+    mouse e fornece funcionalidades adicionais como menus e janelas de tooltip.  
+    """  
     
     def __init__(self, master, icon="imagens/icons/icone-padrao64x64.png"):
         """  
-        Inicializa uma nova instância da MyIcon com os parâmetros fornecidos.
-        Cria um atalho da janela com ícone na barra de tarefas.  
+        Inicializa uma nova instância da classe MyIcon com os parâmetros fornecidos.  
 
-        :param master: O widget pai associado ao ícone.  
-        :param icon: Caminho para o arquivo de ícone.  
+        Esta inicialização cria um atalho da janela com ícone na barra de tarefas, configurando   
+        o ícone que será exibido, além de inicializar diversos componentes e gerenciadores   
+        de eventos necessários para a funcionalidade do ícone.  
+
+        :param master: O widget pai associado ao ícone. Deve ser uma instância de um widget Tkinter.  
+        :param icon: Caminho para o arquivo de ícone. O valor padrão é "imagens/icons/icone-padrao64x64.png".  
         """  
         self.master = master
         self._name = master.titulo

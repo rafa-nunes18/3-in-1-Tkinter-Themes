@@ -1,11 +1,39 @@
-# Documentação do MyPopup  
+# Autor:
 
-# Introdução  
+# Rafael A. Nunes (rafa.nunes2018@hotmail.com) 2024 
 
-# A classe `MyPopup` é uma ferramenta para exibir diálogos interativos no aplicativo.
-# Ela permite a exibição de mensagens, bem como a solicitação de respostas do usuário, como confirmações e cancelamentos.  
+# Inspiração:
 
-# Exemplo de Uso  
+# Repositório no GitHub de rdbende chamado Sun Valley messageboxes
+# https://github.com/rdbende/Sun-Valley-messageboxes
+# rdbende (rdbende@proton.me)
+# https://matrix.to/#/@rdbende:matrix.org
+# @rdbende@mastodon.social
+
+# MIT License
+
+# Copyright (c) 2021 rdbende
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# Introdução:
+# Exemplos de uso de MyPopup
 
 # Importar arquivo que contem a class MyPopup
 from BoxDialog import MyPopup  

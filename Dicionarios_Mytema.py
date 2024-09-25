@@ -1,3 +1,11 @@
+# Autor:
+
+# Rafael A. Nunes (rafa.nunes2018@hotmail.com) 2024
+
+# Introdução:
+# Organizar recursos visuais de uma interface de usuário.
+# Definindo dicionários que mapeiam cursores, fundos, ícones e cores para diferentes temas escuros em várias plataformas.
+
 # Dicionário de cursores do modo dark
 cursores_windows = {
         "forest-dark":"@imagens/cursores/cursor-forest.cur",        

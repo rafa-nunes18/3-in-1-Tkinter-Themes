@@ -1,3 +1,40 @@
+# Autor:
+
+# Rafael A. Nunes (rafa.nunes2018@hotmail.com) 2024
+
+# Inspirações:
+
+# Temas
+# Repositórios no GitHub de rdbende chamados, Tema Azure-ttk , Tema floresta-ttk, Tema Sun-Valley-ttk
+# https://github.com/rdbende/Azure-ttk-theme
+# https://github.com/rdbende/Forest-ttk-theme
+# https://github.com/rdbende/Sun-Valley-ttk-theme
+# rdbende (rdbende@proton.me)
+# https://matrix.to/#/@rdbende:matrix.org
+# @rdbende@mastodon.social 
+
+# Classe ttk.Combobox
+# Uma resposta de j_4321 no site https://stackoverflow.com/ 
+# "Como alterar dinamicamente as cores do menu suspenso ttk.Combobox?"
+# https://stackoverflow.com/questions/64755118/how-to-change-ttk-combobox-dropdown-colors-dynamically
+# j_4321 (https://stackoverflow.com/users/6415268/j-4321)
+
+# Barra personalizada
+# O Video no YouTube de Codemy.com chamado "Custom Titlebar Hack! - Python Tkinter GUI Tutorial 188"
+# https://www.youtube.com/watch?v=s0cpxPSN4k4
+# Codemy.com (mail@codemy.com)
+# https://codemy.com/
+
+# Código - utilizar a API do windows para manter o ícone da janela
+# Repositório no GitHub de Terranova-Python chamado Barra de menu Tkinter
+# https://github.com/Terranova-Python/Tkinter-Menu-Bar
+# Terranova-Python (https://github.com/Terranova-Python)
+# https://terranovatech.info
+
+# Introdução:
+# A classe "MyTema" é uma ferramenta para exibir a Janela do Tkinter com a interface do aplicativo pessoalizada.
+# Utiliza os 3 Temas e cria a possibilidade de alternar e escolher qual tema atual através de widgets. 
+
 # Importar bibliotecas
 from tkinter import *
 import tkinter as tk
@@ -21,13 +58,16 @@ elif sys.platform.startswith("linux"):
 
 
 class MyTema(tk.Tk):
-
-        
+    """  
+    Classe principal para a criação de uma janela personalizada com diferentes temas.  
+    Esta classe estende a classe Tk do Tkinter, permitindo customizações para   
+    sistemas operacionais tais como temas visuais específicos, manipulação de ícones e  
+    cursores personalizados.  
+    """        
     def __init__(self,title, *args, **kwargs):
         """  
-        Inicializa a nova instância de TKinter personalizada com os 3 temas.
-        Barra de titulo padrão oculta. 
-        Uma barra de titulo personalizada.  
+        Inicializa uma nova instância da classe MyTema, que é uma extensão personalizada  
+        da janela padrão do Tkinter.  
 
         :param title: Título da janela.  
         """     
@@ -517,15 +557,23 @@ class MyTema(tk.Tk):
 
     
 class MyCombobox(ttk.Combobox):
+    """  
+    Classe personalizada que estende ttk.Combobox para permitir a customização de menus   
+    (janela popdown) e funcionalidade de auto-completar.  
+
+    A classe mantém um registro de todas as instâncias criadas, proporcionando  
+    a capacidade de atualizar estilos e comportamentos de todas as instâncias simultaneamente.  
+    """ 
     instances = []
    
     def __init__(self, master=None, **kwargs):
         """  
-        Inicializa uma instância de ttk.Combobox para poder personalizar seus menus (janela popdown).  
+        Inicializa uma nova instância de MyCombobox, permitindo a personalização dos menus   
+        e a ativação de funcionalidades como auto-completar.  
 
         :param master: O widget pai onde o Combobox será colocado.  
-        :param kwargs: Argumentos adicionais para configuração do Combobox.    
-        """ 
+        :param kwargs: Argumentos adicionais para configuração do Combobox.  
+        """  
         self.readonly_status = kwargs.pop('status', False)  
         super().__init__(master, **kwargs)  
         MyCombobox.instances.append(self)  
@@ -629,10 +677,17 @@ class MyCombobox(ttk.Combobox):
 
 
 class MyBar(tk.Frame):
+    """  
+    Classe que estende tk.Frame para criar uma barra de título personalizada.  
+
+    Essa barra fornece funcionalidades adicionais, como exibir ícones, título,  
+    e botões de controle para minimizar, maximizar/restaurar e fechar a janela.  
+    A aparência e o comportamento da barra podem ser ajustados com base no sistema operacional.  
+    """
 
     def __init__(self,master, *args, **kwargs):
         """  
-        Inicializa uma instância de tk.Frame para servir como barra de titulo personalizada.  
+        Inicializa uma instância de MyBar, configurando sua aparência e elementos.  
 
         :param master: O widget pai onde a barra será colocada.  
         :param args: Argumentos adicionais para configuração do Frame.  
@@ -853,12 +908,19 @@ class MyBar(tk.Frame):
         self.icon_image = icone_imagem       
 
 
-class MyTopLevel(Toplevel):       
+class MyTopLevel(Toplevel):
+    """  
+    Classe que estende Toplevel para criar uma janela adicional com uma barra personalizada.  
+
+    Esta classe é responsável por configurar a janela Toplevel, incluindo a criação de   
+    widgets apropriados e a aplicação de configurações específicas para diferentes sistemas operacionais.  
+    """         
    
     def __init__(self,master, title, nome_toplevel, widgets_informacoes, posicao_informacoes,toplevel_configs, *args, **kwargs):
         """  
-        Inicializa uma instância de TopLevel.
-        Este método configura a janela toplevel, inicializa atributos e cria a interface gráfica conforme necessário.  
+        Inicializa uma instância de MyTopLevel.  
+        
+        Este método configura a janela Toplevel, inicializa atributos e cria a interface gráfica conforme necessário.  
 
         :param master: A janela pai da qual este toplevel será uma instância.  
         :param title: O título que será exibido na barra de título do toplevel.  
@@ -1076,13 +1138,21 @@ class MyTopLevel(Toplevel):
 
 
 class MyTopManager:
+    """  
+    Classe responsável por gerenciar instâncias de Toplevel e seus widgets.  
+
+    Esta classe fornece funcionalidades para abrir, excluir e configurar janelas Toplevel   
+    em diferentes sistemas operacionais, além de gerenciar suas opções de widgets e layout.  
+    """ 
     toplevel_instances = {}
 
     def __init__(self):
         """  
-        Inicializa a nova instância da classe MyTopManager.
-        Este método cria os atributos iniciais (lista e dicionários) necessários para gerenciar os toplevels e widgets.  
-        """        
+        Inicializa uma nova instância da classe MyTopManager.  
+        
+        Este método cria os atributos iniciais (listas e dicionários) necessários para gerenciar  
+        os Toplevels e widgets.  
+        """       
         self.toplevels = []
         self.widgets_informacoes = {}   
         self.posicao_informacoes = {}
@@ -1312,13 +1382,20 @@ class MyTopManager:
                             
                             
 class WindowsAPIManager:
+    """  
+    Classe responsável por manipular propriedades de janelas no Windows utilizando a API do sistema operacional.  
+
+    Esta classe fornece métodos estáticos para ajustar a aparência e o comportamento das janelas Tkinter   
+    na barra de tarefas do Windows. Ela garante que janelas sejam exibidas corretamente como aplicativos,   
+    mantém o ícone na barra de tarefas e permite que a janela perca o foco conforme necessário.  
+    """  
 
     def __init__(self):
         """  
-        Inicializa a nova instância da classe WindowsAPIManager para manipular a janela do windows usando sua API.  
+        Inicializa uma nova instância da classe WindowsAPIManager para manipular janelas no Windows.  
 
-        obs: Este método configura a instância sem parâmetros adicionais.  
-        """    
+        Nota: Este método configura a instância sem parâmetros adicionais.  
+        """   
         pass 
 
     @staticmethod    
@@ -1366,13 +1443,20 @@ class WindowsAPIManager:
 
 
 class MacAPIManager:
+    """  
+    Classe responsável por manipular propriedades de janelas no macOS utilizando a API nativa.  
+
+    Esta classe fornece métodos estáticos para ajustar o comportamento e a aparência das janelas Tkinter   
+    em sistemas macOS. Ela permite ocultar botões padrão da janela, configurar a aparência (modo claro ou escuro),  
+    e definir cursores personalizados.  
+    """  
 
     def __init__(self):
         """  
-        Inicializa a nova instância da classe MacAPIManager para manipular a janela do macOS usando sua API.  
+        Inicializa uma nova instância da classe MacAPIManager para manipular janelas no macOS.  
 
-        Este método configura a instância sem parâmetros adicionais.  
-        """    
+        Nota: Este método configura a instância sem parâmetros adicionais.  
+        """      
         pass 
 
     @staticmethod    
