@@ -1,4 +1,4 @@
-<h1 align="center">Sun Valley ttk theme examples</h1>
+<h1 align="center">3 em 1 Temas de Tkinter</h1>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/rdbende/Sun-Valley-ttk-theme/master/assets/cover_dark.png">
   <img alt="Cover image" src="https://raw.githubusercontent.com/rdbende/Sun-Valley-ttk-theme/master/assets/cover_light.png">
