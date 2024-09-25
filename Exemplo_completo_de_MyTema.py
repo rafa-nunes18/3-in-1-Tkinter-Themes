@@ -1,6 +1,7 @@
 # Importar bibliotecas
 from TkTema import *
-from Exemplo_MyPopup import chamar_popups
+from exemplo_mypopup import chamar_popups
+from exemplo_comando_mytoplevel import exemplo_comando
     
 # Iniciar instancias
 root = MyTema("*****  Meu projeto de Mudar o tema Tkinter  *****")
@@ -137,28 +138,28 @@ top.set_toplevel_config('toplevel_1', peso_colunas={1: 1},peso_linhas={4:1})
 top.set_widget_options("rotulo1", ttk.Label, 'toplevel_1', text="Esse é o rótulo 1!")
 top.set_widget_grid("rotulo1","grid",row=1, column=1,padx=100, pady=10,sticky="nsew",)
 
-top.set_widget_options("botao1", ttk.Button, 'toplevel_1', text="Botão 1", command=lambda:top.exemplo_comando("Botão 1"))
+top.set_widget_options("botao1", ttk.Button, 'toplevel_1', text="Botão 1", command=lambda:exemplo_comando("Botão 1"))
 top.set_widget_grid("botao1", "grid",row=2, column=1,padx=10, pady=10,sticky="nsew",)
 
-top.set_widget_options("botao2", ttk.Button, 'toplevel_1', text="Botão 2", command=lambda:top.exemplo_comando("Botão 2"))  
+top.set_widget_options("botao2", ttk.Button, 'toplevel_1', text="Botão 2", command=lambda:exemplo_comando("Botão 2"))  
 top.set_widget_grid("botao2", "grid",row=3, column=1,padx=10, pady=10,sticky="nsew",)
  
 # Botão para abrir Toplevel  
-button_3 = ttk.Button(widgets_frame, text="Abrir Toplevel 1", command=lambda:top.abrir_toplevel(root,"toplevel_1","Nova Janela Personalizada 1"))  
+button_3 = ttk.Button(widgets_frame, text="Abrir Toplevel 1", command=lambda:top.abrir_mytoplevel(root,"toplevel_1","Nova Janela Personalizada 1"))  
 button_3.grid(row=10, column=0, padx=5, pady=10, sticky="nsew")
 
 # definindo as informações os widgets ( nomes, posições) 
 top.set_widget_options("rotulo2", ttk.Label, 'toplevel_2', text="Esse é o rótulo 2!")
 top.set_widget_grid("rotulo2","grid",row=1, column=1,padx=100, pady=10,sticky="nsew",) 
 
-top.set_widget_options("botao3", ttk.Button, 'toplevel_2', text="Botão 3", command=lambda:top.exemplo_comando("Botão 3"))
+top.set_widget_options("botao3", ttk.Button, 'toplevel_2', text="Botão 3", command=lambda:exemplo_comando("Botão 3"))
 top.set_widget_grid("botao3", "grid",row=2, column=1,padx=10, pady=10,sticky="nsew",)
 
-top.set_widget_options("botao4", ttk.Button, 'toplevel_2', text="Botão 4", command=lambda:top.exemplo_comando("Botão 4"))  
+top.set_widget_options("botao4", ttk.Button, 'toplevel_2', text="Botão 4", command=lambda:exemplo_comando("Botão 4"))  
 top.set_widget_grid("botao4", "grid",row=3, column=1,padx=10, pady=10,sticky="nsew",)
  
 # Botão para abrir Toplevel  
-button_4 = ttk.Button(widgets_frame, text="Abrir Toplevel 2", command=lambda:top.abrir_toplevel(root,"toplevel_2","Nova Janela Personalizada 2"))  
+button_4 = ttk.Button(widgets_frame, text="Abrir Toplevel 2", command=lambda:top.abrir_mytoplevel(root,"toplevel_2","Nova Janela Personalizada 2"))  
 button_4.grid(row=11, column=0, padx=5, pady=10, sticky="nsew")
 
 # Panedwindow
