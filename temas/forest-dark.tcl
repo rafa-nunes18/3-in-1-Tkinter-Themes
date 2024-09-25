@@ -598,7 +598,7 @@ namespace eval ttk::theme::forest-dark {
 
         # Treeview
         ttk::style element create Treeview.field image $I(card) \
-            -border 5
+            -border 5 -width 0 -height 0
 
         ttk::style element create Treeheading.cell image \
             [list $I(rect-hover) \
