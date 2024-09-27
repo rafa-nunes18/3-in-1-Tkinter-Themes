@@ -47,7 +47,7 @@ h = tk.BooleanVar()
 variavel_1 = StringVar()  # Set default theme  
 checagem_1 = IntVar(value=0)
 titulo_1 = "Menu de temas"
-temas_light = ["sun","forest","azure"]
+temas_light = ["sun-valley","forest","azure"]
 
 # Create a Frame for the Checkbuttons
 check_frame = ttk.Labelframe(root, text="Checkbuttons", padding=(20, 10))

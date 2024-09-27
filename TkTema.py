@@ -47,6 +47,8 @@ import Dicionarios_Mytema as dicio
 # Importações específicas para diferentes sistemas operacionais 
 if sys.platform == "win32":
     from ctypes import windll
+    from pynput import mouse
+    import ctypes 
 elif sys.platform == "darwin":
     import AppKit
     from AppKit import NSImage, NSCursor, NSSize
@@ -74,6 +76,7 @@ class MyTema(tk.Tk):
         super().__init__(*args, **kwargs)                                       
         self.titulo = title                       
         self.menus = []
+        self.menus_button= []
         self.tema = None        
         self.estilo = ttk.Style()       
         self.mycombo = MyCombobox(self)
@@ -98,21 +101,19 @@ class MyTema(tk.Tk):
         self.criar_temas()
         self.ativar_tema()           
         self.mudar_titulo(self.titulo) 
-        self.focus_force()                 
+        self.focus_force()               
         if sys.platform == "win32":
             self.ativar_tema_transparencia()
             self.manter_icone()
-            self.iconbitmap(self.icone_padrao)
+            self.iconbitmap(self.icone_padrao)          
         elif sys.platform == "darwin":
             self.cursor_mac_ativo = False
-            self.overrideredirect(False)
-            self.menus_button= []
+            self.overrideredirect(False)            
             self.loc = Quartz.CGEventGetLocation                    
             MacAPIManager.hide_window_buttons(self)
             self.set_icon_mac()
             AppKit.NSApplication.sharedApplication()                                              
         elif sys.platform.startswith("linux"):
-            self.menus_button= []
             self.screenshot_path = "tema_screenshot.png"
             self.criar_atalho_linux()           
             self.master_linux = True
@@ -193,7 +194,7 @@ class MyTema(tk.Tk):
         elif sys.platform.startswith("linux"):
             self.cursor_padrao = "arrow"
             MyTema.mudar_cursor(self,self.cursor_padrao) 
-            if tema in dicio.cursores_windows:
+            if tema in dicio.cursores_linux:
                 cursor = dicio.cursores_linux[tema]
                 self.cursor_padrao = cursor           
                 MyTema.mudar_cursor_linux(self,cursor)
@@ -299,35 +300,135 @@ class MyTema(tk.Tk):
         """
         self.after(50, self.set_all_menu_cursor_linux)
             
+    def enter_button_menu_windows(self,event):
+        """  
+        Define o cursor dos menus no windows.  
 
+        :param event: O evento de entrada de mouse.  
+        """          
+        tema = ttk.Style().theme_use()
+        if tema in dicio.cursores_windows:
+            self.bind("<Leave>",self.sair)
+            self.bind("<Enter>",self.entrar)
+
+    def entrar(self,event):
+        """
+        Altera o cursor do mouse de acordo com o tema atual e interrompe o listener.  
+
+        :param event: O evento de entrada do mouse (MouseEvent).  
+        """ 
+        tema = self.estilo.theme_use()
+        WindowsAPIManager.set_cursor_padrao()
+        self.mudar_cursores(tema)
+        self.unbind("<Enter>")
+        self.listener.stop()    
+
+    def sair(self,event):
+        """  
+        Inicia o listener e altera o cursor do mouse para o padrão definido.  
+
+        :param event: O evento de saída do mouse (MouseEvent).  
+        """  
+        self.listener = mouse.Listener(on_move=self.on_tk_global_move)  
+        self.listener.start()
+        WindowsAPIManager.change_cursor(self.cursor_padrao)
+        self.unbind("<Leave>")  
+
+    def on_tk_global_move(self, x, y):
+        """  
+        Usa Listener para capturar movimento do cursor globalmente se fora da janela tkinter.
+        Muda o cursor caso seja encontrado o movimento.  
+
+        :param x: A coordenada x do movimento do mouse.  
+        :param y: A coordenada y do movimento do mouse.  
+        """    
+        try:  
+            x1 = self.winfo_rootx()  
+            y1 = self.winfo_rooty()  
+            x2 = x1 + self.winfo_width()  
+            y2 = y1 + self.winfo_height()  
+            if not (x1 <= x <= x2 and y1 <= y <= y2):
+                WindowsAPIManager.set_cursor_padrao()              
+                self.listener.stop()                                    
+                return                  
+        except Exception as e:  
+            print(f"Ocorreu um erro no Listener: {e}")
+            self.listener.stop()                  
+            
     def set_all_buttons_menu(self):
         """  
         Configura todos os botões de menu para alterar o cursor ao interagir.  
         """ 
         for button in self.menus_button:
-            if sys.platform == "darwin":                
+            if sys.platform == "win32" :
+                button.bind("<ButtonRelease-1>",self.enter_button_menu_windows)       
+            elif sys.platform == "darwin":                
                 button.bind("<Button-1>",self.enter_button_menu_mac)
                 button.bind("<ButtonRelease-1>",self.enter_button_menu_mac)
             elif sys.platform.startswith("linux"):
-                button.bind("<Button-1>",self.enter_button_menu_linux)
-
+                button.bind("<Button-1>",self.enter_button_menu_linux)         
+          
     def set_all_menu_cursor_linux(self):
         """  
         Altera o cursor de todos os menus no sistema Linux.  
-        """           
-        for menu in self.menus:
-            tema = ttk.Style().theme_use()
-            if tema in dicio.cursores_mac:          
+        """ 
+        tema = ttk.Style().theme_use()          
+        for menu in self.menus:            
+            if tema in dicio.cursores_linux:          
                 MyTema.mudar_cursor_linux(menu,self.cursor_padrao)
             else:
-                MyTema.mudar_cursor(menu,self.cursor_padrao)         
+                MyTema.mudar_cursor(menu,self.cursor_padrao)
+
+    def buscar_menus(self):
+        """  
+        Busca e armazena todos os menus na interface.  
+        """         
+        def buscar_recursivo(widget):             
+            if isinstance(widget, tk.Menu):  
+                self.menus.append(widget)            
+            for child in widget.winfo_children():  
+                buscar_recursivo(child)
+        buscar_recursivo(self)
+
+    def buscar_menus_linux(self, parent=None):
+        """  
+        Busca e armazena todos os menus na interface no sistema Linux.  
+
+        :param parent: O widget pai a partir do qual a busca deve começar.  
+        """    
+        if parent is None:  
+            parent = self
+        if isinstance(parent, (tk.Tk, tk.Toplevel)):  
+            menu = parent.config().get('menu')  
+            if isinstance(menu, tk.Menu):  
+                self.menus.append(menu)
+        for child in parent.winfo_children():
+            if isinstance(child, tk.Menubutton):  
+                menu = child['menu']  
+                if isinstance(menu, tk.Menu): 
+                    self.menus.append(menu)           
+            elif isinstance(child, tk.Menu):
+                menu = child
+                self.menus.append(menu)
+            self.buscar_menus_linux(child)            
+    
+    def update_menubutton_styles(self, **kwargs):
+        """  
+        Atualiza os estilos de todos os Menus com os parâmetros fornecidos.  
+
+        :param kwargs: Argumentos adicionais para configurar os estilos dos menus.  
+        """         
+        for menu in self.menus:         
+            menu.config(**kwargs) 
 
     def mainloop(self, *args, **kwargs):
         """  
         Inicia o loop principal da aplicação, configurando os menus e botões conforme o sistema operacional.  
         """  
-        if sys.platform == "win32" :            
+        if sys.platform == "win32":            
             self.buscar_menus()
+            self.buscar_botoes_menu()
+            self.set_all_buttons_menu() 
         elif sys.platform == "darwin": 
             self.buscar_botoes_menu()
             self.set_all_buttons_menu()                          
@@ -433,49 +534,7 @@ class MyTema(tk.Tk):
             bg_color = self.estilo.lookup(ttk.Labelframe, 'background')  
         else:            
             bg_color = self.estilo.lookup(tema, 'background')       
-        self.configure(bg=bg_color) 
- 
-    def buscar_menus(self):
-        """  
-        Busca e armazena todos os menus na interface.  
-        """         
-        def buscar_recursivo(widget):             
-            if isinstance(widget, tk.Menu):  
-                self.menus.append(widget)            
-            for child in widget.winfo_children():  
-                buscar_recursivo(child)
-        buscar_recursivo(self)
-
-    def buscar_menus_linux(self, parent=None):
-        """  
-        Busca e armazena todos os menus na interface no sistema Linux.  
-
-        :param parent: O widget pai a partir do qual a busca deve começar.  
-        """    
-        if parent is None:  
-            parent = self
-        if isinstance(parent, (tk.Tk, tk.Toplevel)):  
-            menu = parent.config().get('menu')  
-            if isinstance(menu, tk.Menu):  
-                self.menus.append(menu)
-        for child in parent.winfo_children():
-            if isinstance(child, tk.Menubutton):  
-                menu = child['menu']  
-                if isinstance(menu, tk.Menu): 
-                    self.menus.append(menu)           
-            elif isinstance(child, tk.Menu):
-                menu = child
-                self.menus.append(menu)
-            self.buscar_menus_linux(child)            
-    
-    def update_menubutton_styles(self, **kwargs):
-        """  
-        Atualiza os estilos de todos os Menus com os parâmetros fornecidos.  
-
-        :param kwargs: Argumentos adicionais para configurar os estilos dos menus.  
-        """         
-        for menu in self.menus:         
-            menu.config(**kwargs)                    
+        self.configure(bg=bg_color)                       
 
     def atualizar_widgets(self, tema):
         """  
@@ -1387,7 +1446,7 @@ class WindowsAPIManager:
 
     Esta classe fornece métodos estáticos para ajustar a aparência e o comportamento das janelas Tkinter   
     na barra de tarefas do Windows. Ela garante que janelas sejam exibidas corretamente como aplicativos,   
-    mantém o ícone na barra de tarefas e permite que a janela perca o foco conforme necessário.  
+    mantém o ícone na barra de tarefas, permite que a janela perca o foco conforme necessário e muda o cursor do sistema.  
     """  
 
     def __init__(self):
@@ -1441,6 +1500,24 @@ class WindowsAPIManager:
         windll.user32.ShowWindow(hwnd, 2)
         windll.user32.SetForegroundWindow(windll.user32.GetDesktopWindow())
 
+    @staticmethod        
+    def set_cursor_padrao():
+        """  
+        Restaura o cursor do sistema para o cursor padrão configurado no Windows.  
+
+        Nota: essa função não aceita parâmetros.  
+        """
+        ctypes.windll.user32.SystemParametersInfoW(0x0057, 0, None, 0)
+
+    @staticmethod 
+    def change_cursor(cursor):
+        """  
+        Altera o cursor do sistema para um cursor especificado.  
+
+        :param cursor: O caminho para o arquivo do cursor a ser carregado. 
+        """ 
+        cursor_handle = ctypes.windll.user32.LoadCursorFromFileW(cursor.replace("@",""))         
+        ctypes.windll.user32.SetSystemCursor(cursor_handle, 32512)     
 
 class MacAPIManager:
     """  
