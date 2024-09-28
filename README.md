@@ -1,17 +1,16 @@
 <h1 align="center">3 em 1 Temas de Tkinter</h1>
 
-Depois de descobrir os lindos temas para Tkinter do rdbende, tive várias ideias de como aumentar a personalização da janela do Tkinter.
-Assim, implementei uma nova barra de título, um atalho na barra de tarefas, um novo toplevel e um popup de diálogo, tudo utilizando as cores dos temas e seus temas disponíveis.
+Depois de descobrir os lindos temas para Tkinter do rdbende, tive várias ideias de como aumentar a personalização dos seus 3 temas.
+Assim, implementei uma nova barra de título, um atalho que se abre na barra de tarefas, um jeito diferente para abrir um toplevel personalizado e támbem adaptando o popup de diálogo do rdbende, tudo utilizando as cores dos temas e seus temas disponíveis.
 
 Além disso, criei widgets que permitem alternar entre os três temas diretamente na interface e escolher entre os modos claro e escuro.
 Adicionei um cursor personalizado que só funciona dentro da janela do Tkinter e está disponível apenas nos temas de modo escuro.
 Para aumentar o desafio, fiz com que tudo funcionasse nos três sistemas operacionais: Windows, MacOS e Linux.
 
-Demo scripts for my stunning [Sun Valley ttk theme](https://github.com/rdbende/Sun-Valley-ttk-theme)
-
-
-## Widgets demo
-![screenshot](https://github.com/rdbende/Sun-Valley-ttk-examples/blob/master/Widget%20demo/Screenshot.png)
+## Temas demo
+![screenshot1](https://github.com/rafa-nunes18/3-in-1-Tkinter-Themes/imagens/amostras/Temas%20demo/azure.png)
+![screenshot2](https://github.com/rafa-nunes18/3-in-1-Tkinter-Themes/imagens/amostras/Temas%20demo/forest.png)
+![screenshot3](https://github.com/rafa-nunes18/3-in-1-Tkinter-Themes/imagens/amostras/Temas%20demo/sun-valley.png)
 
 
 ## Invalid entry state
