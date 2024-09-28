@@ -68,7 +68,7 @@ No sistema Linux:
 
       Para instalar, acesse meu repositório xcursor-personalizado-tkinter-linux e siga as instruções.
       
- Link:  https://github.com/rafa-nunes18/xcursor-personalizado-tkinter-linux 
+      Link:  https://github.com/rafa-nunes18/xcursor-personalizado-tkinter-linux 
 
 ## Testado com
 
