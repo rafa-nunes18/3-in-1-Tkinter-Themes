@@ -12,11 +12,8 @@ Para aumentar o desafio, fiz com que tudo funcionasse nos três sistemas operaci
 ![screenshot2](imagens/amostras/forest.png)
 ![screenshot3](imagens/amostras/sun-valley.png)
 
-
-## Invalid entry state
-![invalid entry](https://github.com/rdbende/Sun-Valley-ttk-examples/blob/master/Invalid%20entry/Screenshot_invalid.png)
-![valid entry](https://github.com/rdbende/Sun-Valley-ttk-examples/blob/master/Invalid%20entry/Screenshot_valid.png)
-
+## Dialogos demo
+![screenshot4](imagens/amostras/dialogos.png)
 
 ## Calculator
 ![calculator](https://github.com/rdbende/Sun-Valley-ttk-examples/blob/master/Calculator/Screenshot.png)
