@@ -15,5 +15,5 @@ Para aumentar o desafio, fiz com que tudo funcionasse nos três sistemas operaci
 ## Dialogos demo
 ![screenshot4](imagens/amostras/dialogos.png)
 
-## Calculator
-![calculator](https://github.com/rdbende/Sun-Valley-ttk-examples/blob/master/Calculator/Screenshot.png)
+## Cursores demo
+![cursores](imagens/amostras/cursores.png)
