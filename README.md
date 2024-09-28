@@ -49,7 +49,7 @@ No sistema Linux:
       Para instalar, acesse meu repositório xcursor-personalizado-tkinter-linux e siga as instruções.
       LInk:  https://github.com/rafa-nunes18/xcursor-personalizado-tkinter-linux 
 
-## Testado com:
+## Testado com
 
 Windows: Windows 11 PRO , versão 23H2
 MacOS: Big Sur , versão 11.2.3
@@ -59,7 +59,7 @@ Python , versão 3.12.6
 Resource Hacker 5.2.7
 OBS: Utilizei VMware® Workstation 17 Player (versão 17.5.2) para criar máquinas virtuais com Linux e MacOS instalados.
 
-## Inspirações:
+## Inspirações
 
 - Temas
 Repositórios no GitHub de rdbende chamados, Tema Azure-ttk , Tema floresta-ttk, Tema Sun-Valley-ttk
@@ -113,5 +113,5 @@ Certifique-se de entender completamente o que o código faz antes de utilizá-lo
 
 Se encontrar algum problema usando as versões dos sitemas por mim testado, entre em contato e vamos tentar juntos resolver. 
 
-# Rafael A. Nunes (rafa.nunes2018@hotmail.com) 2024
-# Instagran: @rafa33alves
+### Rafael A. Nunes (rafa.nunes2018@hotmail.com) 2024
+### Instagran: @rafa33alves
