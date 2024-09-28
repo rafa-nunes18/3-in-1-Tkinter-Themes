@@ -26,21 +26,19 @@ No sistema Windows:
 
 - Biblioteca Pillow.
 
-Pode ser instalada com:
-      pip install pillow
+      Pode ser instalada com: pip install pillow
       
 - Biblioteca Pynput.
 
-Pode ser instalada com:
-  pip install pynput
+      Pode ser instalada com: pip install pynput
       
 - Pessoalizar ícone da janela do Python.
 
-Use o arquivo "remover_icon_do_python.py" (leia as instruções)
+      Use o arquivo "remover_icon_do_python.py" (leia as instruções)
 
 No sistema MacOS:
 
-- Biblioteca Pillow. 
+- Biblioteca Pillow.
 
       Pode ser instalada com: pip install pillow
       
@@ -54,19 +52,19 @@ No sistema MacOS:
 
 No sistema Linux:
 
-- Biblioteca Pillow. 
+- Biblioteca Pillow.
 
       Pode ser instalada com: pip install pillow
       
- - Biblioteca Pynput.
+- Biblioteca Pynput.
 
       Pode ser instalada com: pip install pynput
       
- - Biblioteca Xlib.
- 
+- Biblioteca Xlib.
+
       pode ser instalada com: pip install python-xlib
       
- - Biblioteca Tkxcursor.
+- Biblioteca Tkxcursor.
 
       Para instalar, acesse meu repositório xcursor-personalizado-tkinter-linux e siga as instruções.
       
