@@ -76,13 +76,13 @@ OBS: Utilizei VMware® Workstation 17 Player (versão 17.5.2) para criar máquin
 ## Inspirações
 
 - Temas
-    Repositórios no GitHub de rdbende chamados, Tema Azure-ttk , Tema floresta-ttk, Tema Sun-Valley-ttk
-    https://github.com/rdbende/Azure-ttk-theme
-    https://github.com/rdbende/Forest-ttk-theme
-    https://github.com/rdbende/Sun-Valley-ttk-theme
-    rdbende (rdbende@proton.me)
-    https://matrix.to/#/@rdbende:matrix.org
-    @rdbende@mastodon.social 
+    - Repositórios no GitHub de rdbende chamados, Tema Azure-ttk , Tema floresta-ttk, Tema Sun-Valley-ttk
+    - https://github.com/rdbende/Azure-ttk-theme
+    - https://github.com/rdbende/Forest-ttk-theme
+    - https://github.com/rdbende/Sun-Valley-ttk-theme
+    - rdbende (rdbende@proton.me)
+    - https://matrix.to/#/@rdbende:matrix.org
+    - @rdbende@mastodon.social 
 
 - Classe ttk.Combobox
     Uma resposta de j_4321 no site https://stackoverflow.com/ 
