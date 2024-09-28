@@ -27,8 +27,7 @@ No sistema Windows:
 - Biblioteca Pillow.
 
 Pode ser instalada com:
-  
-  pip install pillow
+      pip install pillow
       
 - Biblioteca Pynput.
 
