@@ -131,11 +131,13 @@ OBS: Utilizei VMware® Workstation 17 Player (versão 17.5.2) para criar máquin
 
 Este é o meu primeiro projeto, e enfrentei muitos desafios. Gostaria de destacar os mais problemáticos:
 
-    - Ícone na barra de tarefas:
+- Ícone na barra de tarefas:
+   
       Ao remover a barra de título padrão, o atalho desaparecia ou não era possível personalizá-lo.
       Portanto, cada sistema possui uma solução diferente.
 
-    - Cursores:
+- Cursores:
+
       Para que os cursores possam ser modificados, eles precisam ter formatos e tamanhos específicos.
       A personalização no Linux, em particular, foi um grande desafio.
 
