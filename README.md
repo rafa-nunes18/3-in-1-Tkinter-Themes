@@ -8,9 +8,9 @@ Adicionei um cursor personalizado que só funciona dentro da janela do Tkinter e
 Para aumentar o desafio, fiz com que tudo funcionasse nos três sistemas operacionais: Windows, MacOS e Linux.
 
 ## Temas demo
-![screenshot1](https://github.com/rafa-nunes18/3-in-1-Tkinter-Themes/imagens/amostras/azure.png)
-![screenshot2](https://github.com/rafa-nunes18/3-in-1-Tkinter-Themes/imagens/amostras/forest.png)
-![screenshot3](https://github.com/rafa-nunes18/3-in-1-Tkinter-Themes/imagens/amostras/sun-valley.png)
+![screenshot1](imagens/amostras/azure.png)
+![screenshot2](imagens/amostras/forest.png)
+![screenshot3](imagens/amostras/sun-valley.png)
 
 
 ## Invalid entry state
