@@ -88,7 +88,7 @@ OBS: Utilizei VMware® Workstation 17 Player (versão 17.5.2) para criar máquin
 
 ## Inspirações
 
-- Temas
+- Classe MyTema
     - Os repositórios no GitHub de rdbende chamados, Tema Azure-ttk , Tema floresta-ttk, Tema Sun-Valley-ttk
     - https://github.com/rdbende/Azure-ttk-theme
     - https://github.com/rdbende/Forest-ttk-theme
@@ -97,33 +97,32 @@ OBS: Utilizei VMware® Workstation 17 Player (versão 17.5.2) para criar máquin
     - https://matrix.to/#/@rdbende:matrix.org
     - @rdbende@mastodon.social
 
-- Popup dialog
+- Classe MyPopup
     - O repositório no GitHub de rdbende chamado Sun Valley messageboxes
     - https://github.com/rdbende/Sun-Valley-messageboxes
     - rdbende (rdbende@proton.me)
     - https://matrix.to/#/@rdbende:matrix.org
     - @rdbende@mastodon.social
-
         
-- Classe ttk.Combobox
+- Classe MyCombobox
     - Uma resposta de j_4321 no site https://stackoverflow.com/ 
     - "Como alterar dinamicamente as cores do menu suspenso ttk.Combobox?"
     - https://stackoverflow.com/questions/64755118/how-to-change-ttk-combobox-dropdown-colors-dynamically
     - j_4321 (https://stackoverflow.com/users/6415268/j-4321)
 
-- Barra personalizada
+- Classe Mybar
     - O Video no YouTube de Codemy.com chamado "Custom Titlebar Hack! - Python Tkinter GUI Tutorial 188"
     - https://www.youtube.com/watch?v=s0cpxPSN4k4
     - Codemy.com (mail@codemy.com)
     - https://codemy.com/
 
-- Manter o ícone da janela do Python na barra de tarefas
+- Classe WindowsAPIManager
     - O repositório no GitHub de Terranova-Python chamado Barra de menu Tkinter
     - https://github.com/Terranova-Python/Tkinter-Menu-Bar
     - Terranova-Python (https://github.com/Terranova-Python)
     - https://terranovatech.info
 
-- Criar ícone na barra de tarefas do Linux
+- Classe MyIcon
     - O Repositório no GitHub de Moisés-Palmer chamada pystray
     - https://github.com/moses-palmer/pystray
     - Moisés-Palmer (https://github.com/moses-palmer)
