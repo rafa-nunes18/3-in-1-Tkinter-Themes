@@ -51,12 +51,12 @@ No sistema Linux:
 
 ## Testado com
 
-Windows: Windows 11 PRO , versão 23H2
-MacOS: Big Sur , versão 11.2.3
-Linux: Mint 22 , versão 6.2.9
-Visual Studio Code , versão 1.93.1
-Python , versão 3.12.6
-Resource Hacker 5.2.7
+Windows: Windows 11 PRO , versão 23H2.
+MacOS: Big Sur , versão 11.2.3.
+Linux: Mint 22 , versão 6.2.9.
+Visual Studio Code , versão 1.93.1.
+Python , versão 3.12.6.
+Resource Hacker 5.2.7.
 OBS: Utilizei VMware® Workstation 17 Player (versão 17.5.2) para criar máquinas virtuais com Linux e MacOS instalados.
 
 ## Inspirações
