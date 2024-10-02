@@ -18,7 +18,7 @@ Para aumentar o desafio, fiz com que tudo funcionasse nos três sistemas operaci
 ## Cursores demo
 ![cursores](imagens/amostras/cursores.png)
 
-## Requesitos 
+## Requesitos do sistema
 
 Atenção: Recomendo usar sempre um ambiente virtual para executar os códigos!!!
 
